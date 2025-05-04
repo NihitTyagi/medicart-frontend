@@ -50,7 +50,7 @@ const AddProductForm = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600 text-black"
               placeholder="Enter product name"
               required
             />
@@ -64,7 +64,7 @@ const AddProductForm = () => {
               name="price"
               value={formData.price}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600 text-black"
               placeholder="Enter product price"
               required
             />
@@ -78,7 +78,7 @@ const AddProductForm = () => {
               name="imageUrl"
               value={formData.imageUrl}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600 text-black"
               placeholder="Enter image URL"
               required
             />
@@ -92,7 +92,7 @@ const AddProductForm = () => {
               name="stock"
               value={formData.stock}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600 text-black"
               placeholder="Enter stock quantity"
               required
             />
@@ -106,7 +106,7 @@ const AddProductForm = () => {
               name="salt"
               value={formData.salt}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600 text-black"
               placeholder="Enter salt name"
               required
             />
@@ -120,7 +120,7 @@ const AddProductForm = () => {
               name="usedFor"
               value={formData.usedFor}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600 text-black"
               placeholder="Enter purpose (e.g., Pain Relief)"
               required
             />

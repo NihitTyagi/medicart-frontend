@@ -43,7 +43,7 @@ const AskDoctorForm = () => {
             <textarea
               value={symptoms}
               onChange={(e) => setSymptoms(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600"
+              className="w-full px-3 py-2 border border-gray-300 text-black rounded focus:outline-none focus:border-orange-600"
               placeholder="e.g., fever, headache, cough"
               required
             />
@@ -57,7 +57,7 @@ const AskDoctorForm = () => {
               type="number"
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-600"
+              className="w-full px-3 py-2 border border-gray-300 text-black rounded focus:outline-none focus:border-orange-600 "
               placeholder="e.g., 3"
               required
             />

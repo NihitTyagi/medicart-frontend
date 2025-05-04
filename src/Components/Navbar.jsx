@@ -65,9 +65,7 @@ const Navbar = () => {
             {/* Cart Button */}
             <Link to="/cart" className="relative text-gray-700 hover:text-orange-600 transition-colors">
               <ShoppingCart className="h-6 w-6" />
-              <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-xs h-5 w-5 flex items-center justify-center rounded-full">
-                3
-              </span>
+              
             </Link>
 
             {/* Login Button */}

@@ -10,6 +10,8 @@ import Footer from "./Components/Footer";
 import AdminPanel from "./Pages/AdminPanel";
 import LoginPage from "./Pages/LoginPage";
 import SignupPage from "./Pages/SignupPage";
+import OrderConfirmationPage from "./Pages/OrderConfirmationPage";
+import PaymentPage from "./Pages/PaymentPage";
 
 
 
@@ -17,28 +19,22 @@ import SignupPage from "./Pages/SignupPage";
 const App = () => {
   return (
     <Router>
-      <Navbar/>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<LandingPage/>} />
-        <Route path="/login" element={<SignupPage/>} />
-        <Route path="/signup" element={<LoginPage/>} />
-        <Route path="/cart" element={<CartPage/>}/>
-        <Route path="/products" element={<ProductsPage/>} />
-        <Route path="/categories" element={<CategoriesPage/>} />
-        <Route path="/ask-doctor" element={<AskDoctorPage/>} />
-        <Route path="/adminpanel" element={<AdminPanel/>}/>
-        {/* <Route path="/profile" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>} /> */}
-        <Route
-          path="/cart"
-          element={
-          
-              <CartPage />
-            
-          }
-        />
-      
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<SignupPage />} />
+        <Route path="/signup" element={<LoginPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/categories" element={<CategoriesPage />} />
+        <Route path="/ask-doctor" element={<AskDoctorPage />} />
+        <Route path="/adminpanel" element={<AdminPanel />} />
+        <Route path="/payment" element={<PaymentPage/>} />
+        <Route path="/order-confirmation" element={<OrderConfirmationPage/>} />
+        
+
       </Routes>
-      <Footer/>
+      <Footer />
     </Router>
   );
 };
