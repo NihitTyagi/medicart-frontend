@@ -30,6 +30,7 @@ const SymptomCheckerPage = () => {
             });
 
             const data = await response.json();
+            console.log("Response from backend:", data);
 
             if (!response.ok) {
                 throw new Error(data.error || `HTTP error! status: ${response.status}`);
@@ -117,7 +118,7 @@ const SymptomCheckerPage = () => {
                             ) : 'Get AI Information'}
                         </button>
                     </div>
-                </form>
+                </form> 
 
                 {error && (
                     <div className="mt-6 text-black bg-danger-bg border border-danger-border text-danger-text px-4 py-3 rounded-md relative" role="alert">
@@ -126,23 +127,46 @@ const SymptomCheckerPage = () => {
                     </div>
                 )}
 
-                {aiResponse && (
-                    <div className="mt-8 bg-gray-50 shadow-md rounded-lg p-6">
-                        <h2 className="text-xl font-semibold text-gray-800 mb-3">
-                            Mr.DOC :
-                        </h2>
-                        <div className="prose prose-sm sm:prose-base max-w-none text-gray-700">
-                            {/* Render newlines correctly from the AI response */}
-                            {aiResponse.split('\n').map((line, index) => (
-                                <p key={index} className="mb-2 last:mb-0">{line || <> </>}</p> // Ensure empty lines still take space if desired
-                            ))}
-                        </div>
-                         <div className="mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
-                            <p className="font-bold">Next Steps & Important Reminder:</p>
-                            <p>This information is general. For specific advice, diagnosis, or before taking any medication or product, <strong>please consult your doctor or a pharmacist.</strong> They can provide guidance tailored to your individual health needs.</p>
-                        </div>
-                    </div>
-                )}
+                {aiResponse && (() => {
+    let parsed;
+    try {
+        // Remove Markdown code block formatting if present
+        const cleanedResponse = aiResponse.replace(/```json|```/g, '').trim();
+        parsed = JSON.parse(cleanedResponse);
+    } catch (err) {
+        return (
+            <div className="mt-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                <strong className="font-bold">Invalid AI response format.</strong>
+                <p>Please ensure the AI response is in valid JSON format.</p>
+            </div>
+        );
+    }
+
+    return (
+        <div className="mt-8 bg-gray-50 shadow-md rounded-lg p-6">
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">Mr.DOC's Suggestions:</h2>
+
+            <div className="mb-6">
+                <h3 className="text-lg font-medium text-green-700 mb-2">Suggested Medicines:</h3>
+                <ul className="list-disc list-inside text-black">
+                    {parsed.medicine.map((med, index) => (
+                        <li key={index}>{med}</li>
+                    ))}
+                </ul>
+            </div>
+
+            <div className="mb-6">
+                <h3 className="text-lg font-medium text-yellow-700 mb-2">Precautions:</h3>
+                <p className="text-black">{parsed.precautions}</p>
+            </div>
+
+            <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
+                <p className="font-bold">Important Reminder:</p>
+                <p>This information is general. For specific advice, diagnosis, or before taking any medication or product, <strong>please consult your doctor or a pharmacist.</strong></p>
+            </div>
+        </div>
+    );
+})()}
             </div>
         </div>
     );
