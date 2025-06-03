@@ -68,7 +68,7 @@ const PaymentForm = ({ orderId = "order123" }) => {
                 <span>
                   {name} (x{quantity})
                 </span>
-                <span>${(price * quantity).toFixed(2)}</span>
+                <span>₹{(price * quantity).toFixed(2)}</span>
               </div>
             );
           })
@@ -77,19 +77,19 @@ const PaymentForm = ({ orderId = "order123" }) => {
         <div className="border-t border-gray-200 mt-4 pt-4">
           <div className="flex justify-between py-1 text-black">
             <span>Subtotal</span>
-            <span>${summary.subtotal.toFixed(2)}</span>
+            <span>₹{summary.subtotal.toFixed(2)}</span>
           </div>
           <div className="flex justify-between py-1 text-black">
             <span>Tax</span>
-            <span>${summary.tax.toFixed(2)}</span>
+            <span>₹{summary.tax.toFixed(2)}</span>
           </div>
           <div className="flex justify-between py-1 text-black">
             <span>Shipping</span>
-            <span>${summary.shipping.toFixed(2)}</span>
+            <span>₹{summary.shipping.toFixed(2)}</span>
           </div>
           <div className="flex justify-between py-2 font-bold text-black">
             <span>Total</span>
-            <span>${summary.total.toFixed(2)}</span>
+            <span>₹{summary.total.toFixed(2)}</span>
           </div>
         </div>
 
