@@ -1,22 +1,32 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
 import { ShoppingCart, Search, Menu, X } from "lucide-react";
-import { UserButton } from "@clerk/clerk-react";
-import { Link, useNavigate } from "react-router-dom";
+import { UserButton ,useAuth} from "@clerk/clerk-react";
+import { Link,useLocation,useSearchParams, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const { isSignedIn } = useAuth();
 
-  // Function to handle search submission
+
+  // Sync the input with query param on URL change
+  useEffect(() => {
+    const queryParam = searchParams.get("query") || "";
+    setSearchQuery(queryParam);
+  }, [location.search]); // Trigger this whenever the query param changes
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      // Redirect to the Product Page with the search query as a URL parameter
       navigate(`/products?query=${encodeURIComponent(searchQuery.trim())}`);
-      setSearchQuery(""); // Clear the search input
+      // Don't clear searchQuery if you want it to remain visible after navigating
+      // setSearchQuery("");
     }
   };
+
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -69,11 +79,13 @@ const Navbar = () => {
             </Link>
 
             {/* Login Button */}
+            {!isSignedIn && (
             <Link to="/login" className="hidden md:block">
               <button className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 px-6 rounded-md transition-colors">
                 LOG IN
               </button>
             </Link>
+            )}
 
             {/* User Profile */}
             <div className="hidden md:block">
@@ -117,11 +129,14 @@ const Navbar = () => {
               </Link>
 
               <div className="pt-3 mt-3 border-t border-gray-200 flex items-center justify-between">
-                <Link to="/login" className="block w-full">
-                  <button className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-md w-full transition-colors">
-                    LOG IN
-                  </button>
-                </Link>
+                {!isSignedIn && (
+  <Link to="/login" className="block w-full">
+    <button className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-md w-full transition-colors">
+      LOG IN
+    </button>
+  </Link>
+)}
+
                 <div className="ml-4">
                   <UserButton />
                 </div>

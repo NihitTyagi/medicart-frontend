@@ -1,5 +1,6 @@
-/// <reference types="vite/client" />
+/// UPDATED ASKDOC PAGE
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SymptomCheckerPage = () => {
     const [symptoms, setSymptoms] = useState('');
@@ -8,6 +9,8 @@ const SymptomCheckerPage = () => {
     const [aiResponse, setAiResponse] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +25,7 @@ const SymptomCheckerPage = () => {
         }
 
         try {
-            const backendUrl ='http://localhost:5000';
+            const backendUrl = 'http://localhost:5000';
             const response = await fetch(`${backendUrl}/api/symptoms/check`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -44,14 +47,19 @@ const SymptomCheckerPage = () => {
         }
     };
 
+    const handleSearchMedicines = (medicine) => {
+  if (medicine.length > 0) {
+    const queryString = medicine.join(" ");
+    navigate(`/products?query=${encodeURIComponent(queryString)}`);
+  }
+};
+
     return (
         <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto">
-                <h1 className="text-3xl font-bold text-center text-gray-900 mb-8">
-                    ASK Mr. DOC 
+            <div className="max-w-3xl mx-auto ">
+                <h1 className="text-3xl  font-bold text-center text-gray-900 mb-8">
+                    ASK Mr. DOC
                 </h1>
-
-                
 
                 <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 sm:p-8 space-y-6">
                     <div>
@@ -118,7 +126,7 @@ const SymptomCheckerPage = () => {
                             ) : 'Get AI Information'}
                         </button>
                     </div>
-                </form> 
+                </form>
 
                 {error && (
                     <div className="mt-6 text-black bg-danger-bg border border-danger-border text-danger-text px-4 py-3 rounded-md relative" role="alert">
@@ -128,45 +136,51 @@ const SymptomCheckerPage = () => {
                 )}
 
                 {aiResponse && (() => {
-    let parsed;
-    try {
-        // Remove Markdown code block formatting if present
-        const cleanedResponse = aiResponse.replace(/```json|```/g, '').trim();
-        parsed = JSON.parse(cleanedResponse);
-    } catch (err) {
-        return (
-            <div className="mt-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-                <strong className="font-bold">Invalid AI response format.</strong>
-                <p>Please ensure the AI response is in valid JSON format.</p>
-            </div>
-        );
-    }
+                    let parsed;
+                    try {
+                        const cleanedResponse = aiResponse.replace(/```json|```/g, '').trim();
+                        parsed = JSON.parse(cleanedResponse);
+                    } catch (err) {
+                        return (
+                            <div className="mt-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                                <strong className="font-bold">Invalid AI response format.</strong>
+                                <p>Please ensure the AI response is in valid JSON format.</p>
+                            </div>
+                        );
+                    }
 
-    return (
-        <div className="mt-8 bg-gray-50 shadow-md rounded-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-3">Mr.DOC's Suggestions:</h2>
+                    return (
+                        <div className="mt-8 bg-gray-50 shadow-md rounded-lg p-6">
+                            <img className='w-[50px] h-auto' src="../public/assets/Mr_Doc.jpg" alt="Mr.Doc" />
+                            <div className="mb-6">
+                                <h3 className="text-lg font-medium text-green-700 mb-2">Suggested Medicines:</h3>
+                                <ul className="list-disc list-inside text-black">
+                                    {parsed.medicine.map((med, index) => (
+                                        <li key={index}>{med}</li>
+                                    ))}
+                                </ul>
+                            </div>
 
-            <div className="mb-6">
-                <h3 className="text-lg font-medium text-green-700 mb-2">Suggested Medicines:</h3>
-                <ul className="list-disc list-inside text-black">
-                    {parsed.medicine.map((med, index) => (
-                        <li key={index}>{med}</li>
-                    ))}
-                </ul>
-            </div>
+                            <div className="mb-6">
+                                <h3 className="text-lg font-medium text-yellow-700 mb-2">Precautions:</h3>
+                                <p className="text-black">{parsed.precautions}</p>
+                            </div>
 
-            <div className="mb-6">
-                <h3 className="text-lg font-medium text-yellow-700 mb-2">Precautions:</h3>
-                <p className="text-black">{parsed.precautions}</p>
-            </div>
-
-            <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
-                <p className="font-bold">Important Reminder:</p>
-                <p>This information is general. For specific advice, diagnosis, or before taking any medication or product, <strong>please consult your doctor or a pharmacist.</strong></p>
-            </div>
-        </div>
-    );
-})()}
+                            <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
+                                <p className="font-bold">Important Reminder:</p>
+                                <p>This information is general. For specific advice, diagnosis, or before taking any medication or product, <strong>please consult your doctor or a pharmacist.</strong></p>
+                            </div>
+                            <div className="mt-4 flex justify-center">
+                                <button
+                                    onClick={() => handleSearchMedicines(parsed.medicine)}
+                                    className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+                                >
+                                    Search Medicines
+                                </button>
+                            </div>
+                        </div>
+                    );
+                })()}
             </div>
         </div>
     );

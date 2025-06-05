@@ -23,10 +23,14 @@ const ProductPage = () => {
         const response = await axios.get("/api/products");
         const allProducts = response.data;
         const filtered = query
-          ? allProducts.filter((p) =>
-              p.name.toLowerCase().includes(query.toLowerCase())
-            )
-          : allProducts;
+  ? allProducts.filter((product) => {
+      const productName = product.name.toLowerCase();
+      return query
+        .toLowerCase()
+        .split(" ")
+        .some((word) => productName.includes(word));
+    })
+  : allProducts;
         setProducts(filtered);
       } catch (err) {
         console.error(err);
