@@ -38,21 +38,23 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <div className="h-10 w-10 bg-orange-600 rounded-md flex items-center justify-center shadow-md">
-              <span className="text-white font-bold text-xl">M</span>
+              <Link to="/" className="text-white"><span className="text-white font-bold text-xl">M</span></Link>
+              
             </div>
             <span className="font-bold text-2xl text-orange-600">MediCart</span>
+            
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-10">
-            <Link to="/products" className="font-medium text-gray-800 hover:text-orange-600 transition-colors">
-              Products
+            <Link to="/products" >
+            <span className="font-medium text-orange-600 hover:font-bold">PRODUCTS</span>
             </Link>
-            <Link to="/categories" className="font-medium text-gray-800 hover:text-orange-600 transition-colors">
-              Categories
+            <Link to="/categories" >
+              <span className="font-medium text-orange-600 hover:font-bold">CATEGORIES</span>
             </Link>
-            <Link to="/ask-doctor" className="font-medium text-gray-800 hover:text-orange-600 transition-colors">
-              Ask Doctor
+            <Link to="/ask-doctor" >
+              <span className="font-medium text-orange-600 hover:font-bold">Mr.DOC</span>
             </Link>
           </div>
 
@@ -64,7 +66,7 @@ const Navbar = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search medicines..."
-                className="bg-gray-100 rounded-full py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-orange-500 w-56 border border-gray-200"
+                className="bg-gray-100 rounded-full text-black py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-orange-500 w-56 border border-gray-200"
               />
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-500" />
             </form>
