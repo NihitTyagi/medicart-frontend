@@ -23,7 +23,7 @@ const Navbar = () => {
     if (searchQuery.trim()) {
       navigate(`/products?query=${encodeURIComponent(searchQuery.trim())}`);
       // Don't clear searchQuery if you want it to remain visible after navigating
-      // setSearchQuery("");
+      setSearchQuery("");
     }
   };
 

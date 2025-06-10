@@ -13,16 +13,7 @@ const CTASection = () => {
       
       {/* Content container */}
       <div className="container relative mx-auto px-6 text-center z-10">
-        <div className="max-w-3xl mx-auto">
-          {/* Decorative element */}
-          <div className="inline-block mb-6">
-            <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full backdrop-blur-sm">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-              </svg>
-            </div>
-          </div>
-          
+        <div className="max-w-3xl mx-auto">          
           {/* Heading with animated gradient text */}
           <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-white drop-shadow-md">
             Start Your Health Journey Today
