@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "../axiosInstance";
+import axios from "axios";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useAuth } from "@clerk/clerk-react";
 
@@ -13,6 +13,7 @@ const ProductPage = () => {
 
   const { userId, isSignedIn } = useAuth();
   const navigate = useNavigate();
+  const backend = import.meta.env.VITE_API_URL ;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -20,7 +21,9 @@ const ProductPage = () => {
       setError("");
 
       try {
-        const response = await axios.get("/api/products");
+        
+        console.log("Backend URL:", backend);
+        const response = await axios.get(`${backend}/api/products`);
         const allProducts = response.data;
         const filtered = query
   ? allProducts.filter((product) => {
@@ -52,7 +55,7 @@ const ProductPage = () => {
 
     try {
       debugger
-      await axios.post(`/api/cart/${userId}/add-to-cart`, { productId });
+      await axios.post(`${backend}/api/cart/${userId}/add-to-cart`, { productId });
       alert("Product added to cart!");
     } catch (err) {
       console.error(err);

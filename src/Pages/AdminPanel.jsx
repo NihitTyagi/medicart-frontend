@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "../axiosInstance";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const AddProductForm = () => {
@@ -25,7 +25,8 @@ const AddProductForm = () => {
     setError("");
 
     try {
-      await axios.post("/api/products", formData);
+      const backend = import.meta.env.VITE_API_URL;
+      await axios.post(`${backend}/api/products`, formData);
       navigate("/adminpanel");
       alert("Product added successfully!");
     } catch (err) {

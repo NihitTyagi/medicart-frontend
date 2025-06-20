@@ -25,8 +25,8 @@ const SymptomCheckerPage = () => {
         }
 
         try {
-            const backendUrl = "https://medicart-backend-zeta.vercel.app";
-            const response = await fetch(`${backendUrl}/api/symptoms/check`, {
+            const backend = import.meta.env.VITE_API_URL;
+            const response = await fetch(`${backend}/api/symptoms/check`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ symptoms, duration, age }),

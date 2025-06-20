@@ -10,6 +10,7 @@ const CartPage = () => {
   const [loading, setLoading] = useState(true);
   const { isSignedIn, userId } = useAuth();
   const navigate = useNavigate();
+  const backend = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -20,7 +21,9 @@ const CartPage = () => {
       }
 
       try {
-        const response = await axios.get(`/api/cart/${userId}`);
+              
+
+        const response = await axios.get(`${backend}/api/cart/${userId}`);
         const itemsWithQuantity = (response.data.items || []).map(item => ({
           ...item,
           quantity: item.quantity || 1
@@ -28,28 +31,7 @@ const CartPage = () => {
         setCartItems(itemsWithQuantity);
       } catch (err) {
         console.error("Failed to fetch cart:", err);
-        setCartItems([
-          {
-            _id: "mock1",
-            productId: {
-              _id: "prod1",
-              name: "Demo Product 1",
-              price: 99.99,
-              imageUrl: "/api/placeholder/300/300"
-            },
-            quantity: 1
-          },
-          {
-            _id: "mock2",
-            productId: {
-              _id: "prod2",
-              name: "Demo Product 2",
-              price: 49.99,
-              imageUrl: "/api/placeholder/300/300"
-            },
-            quantity: 2
-          }
-        ]);
+        
       } finally {
         setLoading(false);
       }
@@ -60,7 +42,8 @@ const CartPage = () => {
 
   const handleRemoveFromCart = async (productId) => {
     try {
-      await axios.post(`/api/cart/${userId}/remove-from-cart`, { productId });
+      
+      await axios.post(`${backend}/api/cart/${userId}/remove-from-cart`, { productId });
       setCartItems(prev => prev.filter(item => item.productId._id !== productId));
     } catch (err) {
       console.error("Failed to remove item:", err);
@@ -79,7 +62,7 @@ const CartPage = () => {
     );
 
     try {
-      await axios.put(`/api/cart/${userId}/update-item`, { productId, quantity: newQuantity });
+      await axios.put(`${backend}/api/cart/${userId}/update-item`, { productId, quantity: newQuantity });
     } catch (err) {
       console.error("Failed to update quantity:", err);
       // Revert on failure

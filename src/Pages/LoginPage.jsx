@@ -1,6 +1,5 @@
 import { SignIn } from "@clerk/clerk-react";
 import React from "react";
-import LandingPage from "./LandingPage";
 
 export default function LoginPage(){
     return(
