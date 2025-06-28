@@ -75,10 +75,9 @@ const Navbar = () => {
           {/* Action Buttons */}
           <div className="flex items-center space-x-5">
             {/* Cart Button */}
-            <Link to="/cart" className="relative text-gray-700 hover:text-orange-600 transition-colors">
-              <ShoppingCart className="h-6 w-6" />
-              
-            </Link>
+            <Link to="/cart" className="relative text-black hover:text-orange-600 transition-colors">
+  <ShoppingCart className="h-6 w-6 text-black" />
+</Link>
 
             {/* Login Button */}
             {!isSignedIn && (

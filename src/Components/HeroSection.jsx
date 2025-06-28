@@ -1,5 +1,5 @@
-import { Link } from 'lucide-react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
@@ -27,9 +27,12 @@ const HeroSection = () => {
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <button className="px-8 py-4 bg-white hover:bg-orange-50 text-orange-500 border border-orange-200 font-medium rounded-lg transition-all duration-300">
+              <Link to="/products">
+              <button className="px-8 py-4 bg-black  text-orange-500 border border-orange-200 font-medium rounded-lg transition-all duration-300">
               Shop Now
               </button>
+              </Link>
+              
             </div>
             
             {/* Trust indicators */}
@@ -69,43 +72,6 @@ const HeroSection = () => {
             {/* Shadow blob */}
             <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 w-4/5 h-16 bg-orange-200 filter blur-2xl opacity-70 rounded-full"></div>
             
-            {/* Main hero image with floating elements */}
-            <div className="relative rounded-2xl bg-white shadow-xl p-2 z-10">
-              <img
-                src="/api/placeholder/600/500"
-                alt="Online Pharmacy Service"
-                className="w-full h-full object-cover rounded-xl"
-              />
-              
-              {/* Floating card elements */}
-              <div className="absolute -left-6 top-1/4 bg-white p-4 rounded-lg shadow-lg">
-                <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-500">Delivery Time</p>
-                    <p className="font-bold text-gray-800">24-48 Hours</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="absolute -right-6 bottom-1/4 bg-white p-4 rounded-lg shadow-lg">
-                <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-500">Verified Products</p>
-                    <p className="font-bold text-gray-800">100% Genuine</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
