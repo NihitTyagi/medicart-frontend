@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useAuth } from "@clerk/clerk-react";
 import { ShoppingCart, Package, Heart, Star, Check, X, Pill, Info } from "lucide-react";
+import { toast } from "react-toastify";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -41,6 +42,7 @@ const ProductPage = () => {
       } catch (err) {
         console.error(err);
         setError("Failed to fetch products.");
+        toast.error("Failed to fetch products. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -51,7 +53,7 @@ const ProductPage = () => {
 
   const addToCart = async (productId) => {
     if (!isSignedIn || !userId) {
-      alert("You must be logged in to add items to the cart.");
+      toast.warn("Please log in to add items to the cart.");
       navigate("/login");
       return;
     }
@@ -75,7 +77,7 @@ const ProductPage = () => {
       
     } catch (err) {
       console.error(err);
-      alert("Failed to add product to cart.");
+      toast.error("Failed to add product to cart. Please try again later.");
     } finally {
       setIsAnimating(false);
     }

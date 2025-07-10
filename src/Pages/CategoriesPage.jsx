@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useAuth } from "@clerk/clerk-react";
+import { toast } from "react-toastify";
 import {
   ShoppingCart,
   Package,
@@ -9,8 +10,6 @@ import {
   X,
   Pill,
   Info,
-  ChevronDown,
-  ChevronUp
 } from "lucide-react";
 
 const CategoryPage = () => {
@@ -55,6 +54,8 @@ const CategoryPage = () => {
         setProducts(searchFiltered);
       } catch (err) {
         setError("Failed to fetch products.");
+        toast.error("Failed to fetch products. Please try again later.");
+        
       } finally {
         setLoading(false);
       }
@@ -93,7 +94,7 @@ const CategoryPage = () => {
 
   const addToCart = async (productId) => {
     if (!isSignedIn || !userId) {
-      alert("You must be logged in to add items to the cart.");
+      toast.error("Log in to add items to the cart.");
       navigate("/login");
       return;
     }
@@ -109,7 +110,7 @@ const CategoryPage = () => {
         });
       }, 3000);
     } catch (err) {
-      alert("Failed to add product to cart.");
+      toast.error("Failed to add product to cart.");
     }
   };
 
@@ -169,7 +170,7 @@ const CategoryPage = () => {
           </div>
         ) : error ? (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-            {error}
+            {toast.error(error)}
           </div>
         ) : filteredProducts.length === 0 ? (
           <div className="text-center py-12">

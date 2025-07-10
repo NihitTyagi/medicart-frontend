@@ -3,7 +3,8 @@ import axios from "axios";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { Plus, Minus, ShoppingCart, ArrowRight } from "lucide-react";
-import { CartContext } from "../context/CartContext"; // Adjust path as needed
+import { CartContext } from "../context/CartContext"; 
+import { toast } from "react-toastify";
 
 const CartPage = () => {
   const { cartItems, setCartItems } = useContext(CartContext);
@@ -15,7 +16,8 @@ const CartPage = () => {
   useEffect(() => {
     const fetchCart = async () => {
       if (!isSignedIn || !userId) {
-        alert("Please log in to view your cart.");
+
+        toast.warn("Please log in to view your cart.");
         navigate("/login");
         return;
       }
@@ -31,6 +33,7 @@ const CartPage = () => {
         setCartItems(itemsWithQuantity);
       } catch (err) {
         console.error("Failed to fetch cart:", err);
+        toast.error("Failed to fetch cart. Please try again later.");
         
       } finally {
         setLoading(false);
@@ -47,6 +50,7 @@ const CartPage = () => {
       setCartItems(prev => prev.filter(item => item.productId._id !== productId));
     } catch (err) {
       console.error("Failed to remove item:", err);
+      toast.error("Failed to remove item from cart. Please try again.");
       setCartItems(prev => prev.filter(item => item.productId._id !== productId));
     }
   };
@@ -65,6 +69,7 @@ const CartPage = () => {
       await axios.put(`${backend}/api/cart/${userId}/update-item`, { productId, quantity: newQuantity });
     } catch (err) {
       console.error("Failed to update quantity:", err);
+      toast.error("Failed to update item quantity. Please try again.");
       // Revert on failure
       const originalItem = cartItems.find(item => item.productId._id === productId);
       if (originalItem) {

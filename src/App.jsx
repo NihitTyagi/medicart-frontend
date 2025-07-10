@@ -14,7 +14,9 @@ import SignupPage from "./Pages/SignupPage";
 import OrderConfirmationPage from "./Pages/OrderConfirmationPage";
 import PaymentPage from "./Pages/PaymentPage";
 
-import { CartProvider } from "./context/CartContext"; // Adjust the path if needed
+import { CartProvider } from "./context/CartContext"; 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -35,7 +37,19 @@ const App = () => {
         </Routes>
         <Footer />
       </Router>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </CartProvider>
+
   );
 };
 
