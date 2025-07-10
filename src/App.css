@@ -19,6 +19,29 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+
+
+/* Center the individual toast */
+.custom-toast {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  background-color: #e74c3c !important;
+  color: white !important;
+  font-weight: bold;
+  padding: 1rem 1.5rem !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  z-index: 9999 !important;
+}
+
+/* Optional body styling */
+.custom-toast-body {
+  text-align: center;
+}
+
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

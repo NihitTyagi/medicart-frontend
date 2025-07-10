@@ -38,16 +38,13 @@ const App = () => {
         <Footer />
       </Router>
       <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
+  position="top-center"          // Still required
+  toastClassName="custom-toast"  // Applies to each toast
+  bodyClassName="custom-toast-body"
+  closeOnClick
+  hideProgressBar
+  draggable
+/>
     </CartProvider>
 
   );
