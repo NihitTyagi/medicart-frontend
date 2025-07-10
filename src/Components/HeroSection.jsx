@@ -58,9 +58,9 @@ const HeroSection = () => {
                   Available 24/7 • Instant Results
                 </div>
                 
-                <Link to="/mr-doc">
+                <Link to="/ask-doctor">
                   <button className="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium rounded-lg transition-all duration-300 hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    Try Mr Doc Now
+                    Mr.Doc
                   </button>
                 </Link>
               </div>
