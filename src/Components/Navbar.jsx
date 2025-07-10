@@ -1,6 +1,6 @@
 import React, { useState ,useEffect } from "react";
 import { ShoppingCart, Search, Menu, X } from "lucide-react";
-import { UserButton ,useAuth} from "@clerk/clerk-react";
+import { UserButton ,useAuth ,useUser} from "@clerk/clerk-react";
 import { Link,useLocation,useSearchParams, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -10,6 +10,9 @@ const Navbar = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const { isSignedIn } = useAuth();
+  const { user } = useUser();
+  
+ 
 
 
   // Sync the input with query param on URL change
@@ -119,27 +122,28 @@ const Navbar = () => {
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-500" />
             </form>
             <div className="flex flex-col space-y-3">
-              <Link to="/products" className="font-medium text-gray-800 hover:text-orange-600 py-2">
-                Products
-              </Link>
-              <Link to="/categories" className="font-medium text-gray-800 hover:text-orange-600 py-2">
-                Categories
-              </Link>
-              <Link to="/ask-doctor" className="font-medium text-gray-800 hover:text-orange-600 py-2">
-                Ask Doctor
-              </Link>
+              <Link to="/products" onClick={() => setIsMenuOpen(false)}>
+            <span className="font-medium text-orange-600 hover:font-bold">PRODUCTS</span>
+            </Link>
+            <Link to="/categories" onClick={() => setIsMenuOpen(false)} >
+              <span className="font-medium text-orange-600 hover:font-bold">CATEGORIES</span>
+            </Link>
+            <Link to="/ask-doctor" onClick={() => setIsMenuOpen(false)} >
+              <span className="font-medium text-orange-600 hover:font-bold">Mr.DOC</span>
+            </Link>
 
               <div className="pt-3 mt-3 border-t border-gray-200 flex items-center justify-between">
                 {!isSignedIn && (
-  <Link to="/login" className="block w-full">
+  <Link to="/login" className="block w-full" onClick={() => setIsMenuOpen(false)}>
     <button className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-md w-full transition-colors">
       LOG IN
     </button>
   </Link>
 )}
 
-                <div className="ml-4">
+                <div className="ml-4 flex  gap-2.5 " >
                   <UserButton />
+                  <p className="text-black font-bold">{user?.fullName}</p>
                 </div>
               </div>
             </div>

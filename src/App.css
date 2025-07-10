@@ -64,3 +64,36 @@
 .read-the-docs {
   color: #888;
 }
+
+
+@media (max-width: 400px) {
+  .product-card {
+    font-size: 11px;
+    padding: 0.5rem;
+  }
+
+  .product-card img {
+    height: 90px !important;
+  }
+
+  .product-card .price {
+    font-size: 14px;
+  }
+
+  .product-card .stock {
+    font-size: 11px;
+  }
+
+  .product-card .product-name {
+    font-size: 13px;
+    line-height: 1.2;
+  }
+
+  .product-card .add-btn {
+    font-size: 11px;
+    padding: 0.4rem;
+  }
+
+  
+}
+

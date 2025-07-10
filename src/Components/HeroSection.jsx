@@ -97,9 +97,9 @@ const HeroSection = () => {
             </div>
           </div>
           
-          {/* Right side - Mr Doc Feature for Desktop */}
+         
           <div className="w-full lg:w-1/2 relative">
-            {/* Mr Doc Feature Section - Desktop Only */}
+            
             <div className="hidden lg:block bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-orange-200 shadow-lg mb-8 relative z-10">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mr-4">
@@ -125,7 +125,7 @@ const HeroSection = () => {
                 
                 <Link to="/ask-doctor">
                   <button className="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium rounded-lg transition-all duration-300 hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    Try Mr Doc Now
+                    Mr.Doc 
                   </button>
                 </Link>
               </div>

@@ -55,7 +55,6 @@ const CategoryPage = () => {
       } catch (err) {
         setError("Failed to fetch products.");
         toast.error("Failed to fetch products. Please try again later.");
-        
       } finally {
         setLoading(false);
       }
@@ -133,13 +132,13 @@ const CategoryPage = () => {
     <div className="min-h-screen bg-gray-100 py-8">
       <div className="container mx-auto px-4">
         <div className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Filter by Category</h2>
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-700 mb-4">Filter by Category</h2>
           <div className="flex flex-wrap gap-3">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => handleCategoryClick(category.id)}
-                className={`relative px-6 py-3 rounded-lg font-medium transition-all duration-300 border-2 ${
+                className={`relative text-xs sm:text-sm px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium transition-all duration-300 border-2 ${
                   selectedCategory === category.id
                     ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-200"
                     : "bg-white text-gray-700 border-gray-200 hover:border-blue-400 hover:text-blue-600 hover:shadow-md"
@@ -147,7 +146,7 @@ const CategoryPage = () => {
               >
                 <span>{category.name}</span>
                 {selectedCategory === category.id && (
-                  <span className="absolute -top-2 -right-2 bg-white text-blue-600 px-2 py-1 rounded-full text-xs font-bold border border-blue-200">
+                  <span className="absolute -top-2 -right-2 bg-white text-blue-600 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold border border-blue-200">
                     {category.id === "all" ? products.length : filteredProducts.length}
                   </span>
                 )}
@@ -157,7 +156,7 @@ const CategoryPage = () => {
         </div>
 
         <div className="mb-6">
-          <h3 className="text-xl font-semibold text-gray-800">
+          <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
             {selectedCategory === "all"
               ? `All Products (${filteredProducts.length})`
               : `${categories.find(cat => cat.id === selectedCategory)?.name} Products (${filteredProducts.length})`}
@@ -191,7 +190,7 @@ const CategoryPage = () => {
             )}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
             {filteredProducts.map((product) => {
               const stockStatus = getStockStatus(product.stock);
               const isExpanded = expandedCard === product._id;
@@ -200,51 +199,48 @@ const CategoryPage = () => {
               return (
                 <div
                   key={product._id}
-                  className="group relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  className="group relative bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden text-xs sm:text-sm"
                 >
                   <div className="relative overflow-hidden rounded-t-xl">
                     <img
                       src={product.imageUrl || "/api/placeholder/300/200"}
                       alt={product.name}
-                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-36 sm:h-40 md:h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                     />
-                    
-                    {/* Arrow Button for Details */}
+
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleExpanded(product._id);
                       }}
-                      className="absolute top-3 left-3 w-8 h-8 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110 z-10"
+                      className="absolute top-2 left-2 w-7 h-7 sm:w-8 sm:h-8 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110 z-10"
                     >
                       {isExpanded ? (
-                        <X className="w-4 h-4 text-gray-700" />
+                        <X className="w-3 h-3 sm:w-4 sm:h-4 text-gray-700" />
                       ) : (
-                        <Info className="w-4 h-4 text-blue-600" />
+                        <Info className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
                       )}
                     </button>
 
-                    {/* Stock Status */}
-                    <div className="absolute top-4 right-4">
-                      <div className={`px-3 py-1 rounded-full text-xs font-semibold ${stockStatus.bg} ${stockStatus.color}`}>
+                    <div className="absolute top-2 right-2">
+                      <div className={`px-2 py-1 rounded-full text-[10px] font-semibold ${stockStatus.bg} ${stockStatus.color}`}>
                         {stockStatus.text}
                       </div>
                     </div>
 
-                    {/* Details Overlay */}
                     <div className={`absolute inset-0 bg-white bg-opacity-95 backdrop-blur-sm transition-all duration-300 flex flex-col justify-center p-4 ${
                       isExpanded ? 'opacity-100 visible' : 'opacity-0 invisible'
                     }`}>
-                      <div className="space-y-4">
-                        <div className="flex items-center space-x-2 text-sm text-gray-700">
-                          <Pill className="w-5 h-5 text-blue-500" />
+                      <div className="space-y-3">
+                        <div className="flex items-center space-x-2 text-gray-700">
+                          <Pill className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
                           <div>
-                            <span className="font-semibold">Active Salt:</span>
+                            <span className="font-semibold">Salt:</span>
                             <p className="capitalize text-gray-600">{product.salt}</p>
                           </div>
                         </div>
-                        <div className="flex items-start space-x-2 text-sm text-gray-700">
-                          <Info className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start space-x-2 text-gray-700">
+                          <Info className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5" />
                           <div>
                             <span className="font-semibold">Used for:</span>
                             <p className="capitalize text-gray-600 mt-1">{product.usedFor}</p>
@@ -254,20 +250,18 @@ const CategoryPage = () => {
                     </div>
                   </div>
 
-                  <div className="p-4">
-                    <h3 className="text-lg font-bold text-gray-800 mb-2 line-clamp-2">
+                  <div className="p-3 sm:p-4">
+                    <h3 className="text-sm sm:text-base font-bold text-gray-800 mb-2 line-clamp-2">
                       {product.name.toUpperCase()}
                     </h3>
 
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-2xl font-bold text-indigo-600">₹{product.price}</span>
-                      <div className="flex items-center space-x-1 text-sm text-gray-500">
-                        <Package className="w-4 h-4" />
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-lg sm:text-xl font-bold text-indigo-600">₹{product.price}</span>
+                      <div className="flex items-center space-x-1 text-xs sm:text-sm text-gray-500">
+                        <Package className="w-3 h-3 sm:w-4 sm:h-4" />
                         <span>{product.stock} left</span>
                       </div>
                     </div>
-
-
 
                     <button
                       onClick={(e) => {
@@ -275,27 +269,27 @@ const CategoryPage = () => {
                         addToCart(product._id);
                       }}
                       disabled={product.stock === 0 || isAdded}
-                      className={`w-full py-3 px-6 rounded-lg font-semibold text-white transition-all duration-300 flex items-center justify-center space-x-2 ${
+                      className={`w-full py-2 px-3 sm:py-3 sm:px-6 rounded-lg font-semibold text-white transition-all duration-300 flex items-center justify-center space-x-2 ${
                         isAdded
-                          ? 'bg-green-500 shadow-green-200 shadow-lg'
+                          ? 'bg-green-500 shadow-green-200 shadow-md'
                           : product.stock === 0
                           ? 'bg-gray-400 cursor-not-allowed'
-                          : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl'
+                          : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-md hover:shadow-lg'
                       }`}
                     >
                       {isAdded ? (
                         <>
-                          <Check className="w-5 h-5" />
-                          <span>Added Successfully!</span>
+                          <Check className="w-4 h-4" />
+                          <span>Added!</span>
                         </>
                       ) : product.stock === 0 ? (
                         <>
-                          <X className="w-5 h-5" />
+                          <X className="w-4 h-4" />
                           <span>Out of Stock</span>
                         </>
                       ) : (
                         <>
-                          <ShoppingCart className="w-5 h-5" />
+                          <ShoppingCart className="w-4 h-4" />
                           <span>Add to Cart</span>
                         </>
                       )}
